@@ -14,7 +14,6 @@ def isoverlap(str):
         return False
 
 def numbb():
-    stTime = time.time()
     ans = ''
     print('\n##########숫자 베이스볼 게임##########\n')
     length = input("게임을 진행할 자릿수를 정해 주세요(1~10) : ")
@@ -34,6 +33,7 @@ def numbb():
 
         win = False
         count = 0
+        stTime = time.time()
         while win == False:
             strike = 0
             ball = 0
@@ -66,7 +66,7 @@ def numbb():
         f.close()
         input('종료하시려면 enter 키를 입력해 주세요.')
     
-_version = '0.0.2'
-_changelog = '자릿수 설정이 가능하도록 변경'
+_version = '0.0.3'
+_changelog = '경과시간이 자릿수를 정하고 난 뒤부터 지나가도록 변경'
 
 numbb()
