@@ -50,9 +50,10 @@ def numbb():
             user = input("{}자리 숫자를 입력해 주세요(0 입력 가능) : ".format(length))
             stTime = time.time()
             if len(user) != length or user.isdecimal() == False:
-                print('\n잘못 입력하셨습니다. 4자리의 숫자를 입력해 주세요.\n')
+                print('\n잘못 입력하셨습니다. {}자리의 숫자를 입력해 주세요.\n'.format(length))
                 continue
             if isoverlap(user) == True:
+                print('\n잘못 입력하셨습니다. 중복되지 않는 숫자를 입력해 주세요.\n')
                 continue
             trial += 1
             for a in user:
@@ -82,6 +83,12 @@ def numbb():
             rank = [newScore]
         else:
             f.close()
+        except IOError:
+            print('기록이 존재하지 않습니다. 새로운 데이터베이스를 생성합니다...')
+            rank = [newScore]
+            f = open('Rank.txt','wb')
+            f.close()
+        else:
             idx = 0
             for data in rank:
                 if data.Score < newScore.Score:
@@ -94,6 +101,15 @@ def numbb():
         finally:
             with open('Rank.txt','wb') as f:
                 pickle.dump(rank,f)
+                    idx = idx + 1
+                    if idx == len(rank):
+                        rank.append(newScore)
+        finally:
+            f.close()
+            with open('Rank.txt','wb') as f:
+                pickle.dump(rank,f)
+        input('종료하시려면 enter 키를 입력해 주세요.')
+
 def ranking():
     try:
         with open('Rank.txt','rb') as f:
