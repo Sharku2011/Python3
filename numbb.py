@@ -83,12 +83,6 @@ def numbb():
             rank = [newScore]
         else:
             f.close()
-        except IOError:
-            print('기록이 존재하지 않습니다. 새로운 데이터베이스를 생성합니다...')
-            rank = [newScore]
-            f = open('Rank.txt','wb')
-            f.close()
-        else:
             idx = 0
             for data in rank:
                 if data.Score < newScore.Score:
@@ -101,15 +95,6 @@ def numbb():
         finally:
             with open('Rank.txt','wb') as f:
                 pickle.dump(rank,f)
-                    idx = idx + 1
-                    if idx == len(rank):
-                        rank.append(newScore)
-        finally:
-            f.close()
-            with open('Rank.txt','wb') as f:
-                pickle.dump(rank,f)
-        input('종료하시려면 enter 키를 입력해 주세요.')
-
 def ranking():
     try:
         with open('Rank.txt','rb') as f:
@@ -124,7 +109,7 @@ def ranking():
 , time.strftime("%Y-%m-%d %I:%M",data.Time))
             idx += 1
 
-_version = '0.1.2'
+_version = '0.1.3'
 _changelog = '''기록 저장 방법 업데이트. 이제 과거의 기록을 열람할 수 있습니다.
 소요 시간 측정 기준을 수정했습니다.
 데이터베이스가 없을 때 새로 생성하면서 파일이 제대로 닫히지 않았던 문제를 수정했습니다.
