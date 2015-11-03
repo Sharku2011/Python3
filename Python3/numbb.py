@@ -20,6 +20,7 @@ def isoverlap(str):
             if idx2 == idx:
                 check += 1
         if check >= 2:
+            print('입력하신 문자에 중복되는 숫자가 있습니다. 다시 입력해 주세요.\n')
             return True
     else:
         return False
@@ -91,7 +92,6 @@ def numbb():
                     idx += 1
                     if idx == len(rank):
                         rank.insert(idx,newScore)
-                        break
         finally:
             with open('Rank.txt','wb') as f:
                 pickle.dump(rank,f)
@@ -109,8 +109,11 @@ def ranking():
 , time.strftime("%Y-%m-%d %I:%M",data.Time))
             idx += 1
 
-_version = '0.1.4'
-_changelog = '''기록 저장시 버그(배열 맨 마지막에 추가될 경우) 해결'''
+_version = '0.1.3'
+_changelog = '''기록 저장 방법 업데이트. 이제 과거의 기록을 열람할 수 있습니다.
+소요 시간 측정 기준을 수정했습니다.
+데이터베이스가 없을 때 새로 생성하면서 파일이 제대로 닫히지 않았던 문제를 수정했습니다.
+랭킹 등수가 전부 1들으로 나오는 것을 수정했습니다.'''
 
 numbb()
 ranking()
