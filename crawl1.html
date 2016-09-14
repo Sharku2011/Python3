@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="ko">
+
+
+<head>
+
+	
+	
+	<!--네이버 웹마스터 메타 데이터 -->
+<meta name="naver-site-verification" content="a1b8a708f443b693b358d487e1dc294e13d8db09"/>
+<meta name="description" content="This is a personal blog that contains lots of news relevant to IT, MAC, PROGRAMMING and etc both in Korean and English.">	
+	
+	
+	
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width,target-densitydpi=medium-dpi">
+	<title>[Ruby] Install nokogiri on Ubuntu. - Creative Works for JASON</title>
+	<link rel="alternate" type="application/rss+xml" title="Creative Works for JASON" href="http://creativeworks.tistory.com/rss" />
+
+	<link rel="stylesheet" href="//s1.daumcdn.net/cfs.tistory/custom/blog/168/1689009/skin/style.css?_T_=1467519745">
+	<link rel="stylesheet" href="//s1.daumcdn.net/cfs.tistory/custom/blog/168/1689009/skin/images/font.css">
+
+	<!--[if lt IE 9]>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<![endif]-->
+	<!--[if gte IE 9]><!-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<!--<![endif]-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<!--Google Analytic Code-->	
+	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create','UA-69195051-1','auto');
+	ga('require', 'displayfeatures');
+	ga('require', 'linkid');
+  ga('send', 'pageview');
+
+</script>
+	
+	
+
+
+<!-- Naver Analytic Code -->	
+	<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "7233ad5ad4b194";
+wcs_do();
+</script>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<meta http-equiv="imagetoolbar" content="no"/><link rel="stylesheet" type="text/css" href="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/A_ShareEntryWithSNS/css/shareEntryWithSNS.css"/>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/A_ShareEntryWithSNS/script/shareEntryWithSNS.js"></script>
+
+<style type="text/css">
+		#daumSearchBox {
+			height: 21px;
+			background-image : url(http://i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bg_search2_2.gif);
+			margin: 5px auto ;
+			padding: 0;
+		}
+		#daumSearchBox input {
+			background: none;
+			margin : 0;
+			padding : 0;
+			border : 0;
+		}
+		#daumSearchBox #daumLogo {
+			width: 34px;
+			height: 21px;
+			float: left;
+			margin-right: 5px;
+			background-image : url(http://i1.daumcdn.net/img-media/tistory/img/bg_search1_2_2010ci.gif);
+		}
+		#daumSearchBox #show_q {
+			background-color: transparent;
+			border: none;
+			font: 12px Gulim, Sans-serif;
+			color: #555;
+			margin-top: 4px;
+			margin-right: 15px;
+			float: left;
+		}
+
+		#daumSearchBox #show_btn {
+			background-image : url(http://i1.daumcdn.net/imgsrc.search/search_all/show/tistory/plugin/bt_search_2.gif);
+			width: 37px;
+			height: 21px;
+			float: left;
+			margin:0;
+			cursor:pointer;
+			text-indent:-1000em;
+		}
+	</style><link rel="stylesheet" href="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/lightbox/assets/css/lightbox.min.css" />
+<link rel="stylesheet" type="text/css" href="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/TistoryProfileLayer/style.css" />
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/TistoryProfileLayer/profile.js"></script>
+	<style type="text/css">
+		.another_category { border: 1px solid #E5E5E5; padding: 10px 10px 5px; margin:10px 0; clear: both; }
+		.another_category h4 { font-size: 12px !important; margin: 0 !important; border-bottom: 1px solid #E5E5E5 !important; padding: 2px 0 6px !important; }
+		.another_category h4 a { font-weight: bold !important; }
+		.another_category table { table-layout: fixed; border-collapse: collapse; width: 100% !important; margin-top: 10px !important; }
+		* html .another_category table { width: auto !important; }
+		*:first-child+html .another_category table { width: auto !important; }
+		.another_category th, .another_category td { padding: 0 0 4px !important; }
+		.another_category th { text-align: left; font-size: 12px !important; font-weight: normal;  word-break: break-all; overflow: hidden; line-height: 1.5; }
+		.another_category td { text-align: right; width: 80px; font-size: 11px; }
+		.another_category th a { font-weight: normal; text-decoration: none; border: none !important; }
+		.another_category th a.current{ font-weight: bold; text-decoration: none !important; border-bottom: 1px solid !important; }
+		.another_category th span { font-weight: normal; text-decoration: none; font: 10px Tahoma, Sans-serif; border: none !important; }
+
+		.another_category_color_gray, .another_category_color_gray h4 { border-color: #E5E5E5 !important; }
+		.another_category_color_gray * { color: #909090 !important; }
+		.another_category_color_gray th a.current{border-color:#909090 !important;}
+		.another_category_color_gray h4, .another_category_color_gray h4 a { color: #737373 !important; }
+
+
+		.another_category_color_red, .another_category_color_red h4 { border-color: #F6D4D3 !important;  }
+		.another_category_color_red * { color: #E86869 !important; }
+		.another_category_color_red th a.current{border-color:#E86869 !important;}
+		.another_category_color_red h4, .another_category_color_red h4 a { color: #ED0908 !important; }
+
+
+		.another_category_color_green, .another_category_color_green h4 { border-color: #CCE7C8 !important; }
+		.another_category_color_green * { color: #64C05B !important; }
+		.another_category_color_green th a.current{border-color:#64C05B !important;}
+		.another_category_color_green h4, .another_category_color_green h4 a { color: #3EA731 !important; }
+
+
+		.another_category_color_blue, .another_category_color_blue h4 { border-color: #C8DAF2 !important; }
+		.another_category_color_blue * { color: #477FD6 !important; }
+		.another_category_color_blue th a.current{border-color:#477FD6 !important;}
+		.another_category_color_blue h4, .another_category_color_blue h4 a { color: #1960CA !important; }
+
+
+		.another_category_color_violet, .another_category_color_violet h4 { border-color: #E1CEEC !important;  }
+		.another_category_color_violet * { color:#9D64C5 !important; }
+		.another_category_color_violet th a.current{border-color:#9D64C5 !important;}
+		.another_category_color_violet h4, .another_category_color_violet h4 a { color: #7E2CB5 !important; }
+	</style>
+<script type="text/javascript">
+//<![CDATA[
+var servicePath = "";
+var blogURL = "";
+//]]>
+</script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/lib/jigu/jigu-latest.min.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/T.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/EAF2.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/common.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/gallery.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/flash.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/sha256.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/md5.min.js"></script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/swfobject.js"></script>
+
+<link rel="stylesheet" type="text/css" href="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/style/dialog.css" />
+<link rel="stylesheet" type="text/css" href="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/style/menubar.css"/><style type="text/css">.tt_article_useless_p_margin p {padding-top:0 !important;padding-bottom:0 !important;margin-top:0 !important;margin-bottom:0 !important;}</style><meta name="referrer" content="always"><meta name="description" content="Ruby를 사용하여 HTML을 파싱하기 위해서 nokogiri를 사용려고 Ubuntu에 nokogiri를 설치하면 libxml2를 찾지 못한다는 에러를 만나게 된다. $ sudo gem install nokogiri ERROR: Error installing nokogiri: ERROR: Failed to build gem native extension. /usr/bin/ruby1.8 extconf.rb checking for libxml/parser.h... no ----- libxml2 is missing. please visit http://nokogiri.org/tutorials/installing_nokogiri.html fo..">
+
+<!-- BEGIN OPENGRAPH -->
+<link rel="canonical" href="http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu" /><meta property="og:type" content="article"><meta property="og:url" content="http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu" ><meta property="og:site_name" content="Creative Works for JASON" ><meta property="og:title" content="[Ruby] Install nokogiri on Ubuntu." ><meta name="by" content="JASON" ><meta property="og:description" content="Ruby를 사용하여 HTML을 파싱하기 위해서 nokogiri를 사용려고 Ubuntu에 nokogiri를 설치하면 libxml2를 찾지 못한다는 에러를 만나게 된다. $ sudo gem install nokogiri ERROR: Error installing nokogiri: ERROR: Failed to build gem native extension. /usr/bin/ruby1.8 extconf.rb checking for libxml/parser.h... no ----- libxml2 is missing. please visit http://nokogiri.org/tutorials/installing_nokogiri.html fo.." ><meta property="og:image" content="https://t1.daumcdn.net/cssjs/icon/557567EA016E200001" >
+<!-- END OPENGRAPH -->
+
+
+
+<!-- BEGIN TWITTERCARD -->
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@TISTORY"><meta name="twitter:title" content="[Ruby] Install nokogiri on Ubuntu." ><meta name="twitter:description" content="Ruby를 사용하여 HTML을 파싱하기 위해서 nokogiri를 사용려고 Ubuntu에 nokogiri를 설치하면 libxml2를 찾지 못한다는 에러를 만나게 된다. $ sudo gem install nokogiri ERROR: Error installing nokogiri: ERROR: Failed to build gem native extension. /usr/bin/ruby1.8 extconf.rb checking for libxml/parser.h... no ----- libxml2 is missing. please visit http://nokogiri.org/tutorials/installing_nokogiri.html fo.." ><meta property="twitter:image" content="https://t1.daumcdn.net/cssjs/icon/557567EA016E200001" >
+<!-- END TWITTERCARD -->
+
+
+
+<!-- BEGIN DAUMAPP -->
+<meta property="dg:plink" content="http://creativeworks.tistory.com/1" ><meta name="plink" content="http://creativeworks.tistory.com/1" ><meta name="title" content="[Ruby] Install nokogiri on Ubuntu." ><meta name="article:media_name" content="Creative Works for JASON" ><meta property="article:mobile_url" content="http://creativeworks.tistory.com/m/post/entry/Install-nokogiri-on-Ubuntu" ><meta property="article:pc_url" content="http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu" ><meta property="article:mobile_view_url" content="http://creativeworks.tistory.com/m/post/entry/Install-nokogiri-on-Ubuntu" ><meta property="article:pc_view_url" content="http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu" ><meta property="article:pc_service_home" content="http://www.tistory.com" ><meta property="article:mobile_service_home" content="http://www.tistory.com/m" ><meta property="article:txid" content="1689009_1" /><meta property="article:published_time" content="20140521085257" ><meta property="og:regDate" content="20140521085257" ><meta property="article:modified_time" content="20151218145059" >
+<!-- END DAUMAPP -->
+
+
+
+<!-- BEGIN STRUCTURED_DATA -->
+<script type="application/ld+json">{"@context":"http://schema.org", "@type":"BlogPosting","mainEntityOfPage":{"@id": "http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu"},"url":"http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu","headline":"[Ruby] Install nokogiri on Ubuntu.","description":"Ruby를 사용하여 HTML을 파싱하기 위해서 nokogiri를 사용려고 Ubuntu에 nokogiri를 설치하면 libxml2를 찾지 못한다는 에러를 만나게 된다. $ sudo gem install nokogiri ERROR: Error installing nokogiri: ERROR: Failed to build gem native extension. /usr/bin/ruby1.8 extconf.rb checking for libxml/parser.h... no ----- libxml2 is missing. please visit http://nokogiri.org/tutorials/installing_nokogiri.html fo..","author":{"@type":"Person","name":"JASON"},"image":{"@type":"ImageObject","url":"https://t1.daumcdn.net/cssjs/icon/557567EA016E200001","width":"800px","height":"800px"},"datePublished":"20140521T08:52:57+09:00","dateModified":"20151218T14:50:59+09:00","publisher":{"@type":"Organization","name":"TISTORY","logo":{"@type":"ImageObject","url":"https://t1.daumcdn.net/cssjs/icon/557567EA016E200001","width":"800px","height":"800px"}}}</script>
+<!-- END STRUCTURED_DATA -->
+
+<link rel="apple-touch-icon" href="http://i1.daumcdn.net/thumb/C180x180/?fname=http%3A%2F%2Fcfile4.uf.tistory.com%2Fimage%2F2349CF48563CA19D1B0F4E">
+<link rel="apple-touch-icon" sizes="76x76" href="http://i1.daumcdn.net/thumb/C76x76/?fname=http%3A%2F%2Fcfile4.uf.tistory.com%2Fimage%2F2349CF48563CA19D1B0F4E">
+<link rel="apple-touch-icon" sizes="120x120" href="http://i1.daumcdn.net/thumb/C120x120/?fname=http%3A%2F%2Fcfile4.uf.tistory.com%2Fimage%2F2349CF48563CA19D1B0F4E">
+<link rel="apple-touch-icon" sizes="152x152" href="http://i1.daumcdn.net/thumb/C152x152/?fname=http%3A%2F%2Fcfile4.uf.tistory.com%2Fimage%2F2349CF48563CA19D1B0F4E"></head>
+
+<body id="tt-body-page">
+
+	
+	<script type="text/javascript">
+		T.config = {
+			TOP_SSL_URL: "https://www.tistory.com",
+			PREVIEW: false,
+			ROLE: "GUEST",
+			PREV_PAGE: "/2",
+			NEXT_PAGE: "",
+			BLOG: {
+				isDormancy: false,
+				title: "Creative Works for JASON"
+			},
+			NEED_COMMENT_LOGIN: false,
+			COMMENT_LOGIN_CONFIRM_MESSAGE: "",
+			LOGIN_URL: "https://www.tistory.com/login/?requestURI=http%3A%2F%2Fcreativeworks.tistory.com%2F1",
+			TRACKBACK_COPY_URL: "//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/copyTrackback",
+			TRACKBACK_BUTTON: "whiteButton",
+			DEFAULT_URL: "http://creativeworks.tistory.com",
+			USER: {
+				name: "",
+				homepage: ""
+			}
+		};
+		
+	</script>
+
+		<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/script/blog/common.js"></script>
+		<div style="margin:0px; padding:0px; border:none; background:none; float:none; clear:none; z-index:0"></div>
+
+	
+
+<div id="dkIndex">
+    <!--웹접근성용 바로가기 링크 모음-->
+    <a href="#dkBody">본문 바로가기</a>
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<div id="dkWrap" class="wrap_skin">
+    <!-- 카테고리버튼 클릭시 'navi_on' 클래스 부여 -->
+    <div id="dkHead" role="banner" class="area_head">
+        <h1 class="screen_out">Creative Works for JASON</h1>
+        <button type="button" class="btn_cate">
+            <span class="ico_skin ico_cate">카테고리</span>
+        </button>
+        <div class="area_search ">
+            <button type="button" class="btn_search">
+                <span class="ico_skin ico_search">검색하기</span>
+            </button>
+			
+	            <form action="#" method="get" class="frm_search box_search" onsubmit="try{window.location.href='/search/' + looseURIEncode(document.getElementsByName('search')[0].value);document.getElementsByName('search')[0].value = ''; return false;}catch(e){}">
+	                <fieldset>
+	                    <legend class="screen_out">검색하기</legend>
+	                    <label for="search" class="lab_search screen_out">Search</label>
+	                    <input type="text" name="search" id="search" class="tf_search" placeholder="Search" value="" data-value="">
+	                    <span class="ico_skin ico_search"></span>
+	                </fieldset>
+	            </form>
+			
+        </div>
+        <div class="area_profile">
+            <div class="tit_post">
+                <a href="/" class="link_post">Creative Works for JASON</a>
+            </div>
+            <span class="thumb_profile">
+                <img src="http://cfile4.uf.tistory.com/image/2349CF48563CA19D1B0F4E" class="img_profile" alt="프로필사진">
+            </span>
+            <span class="txt_profile">JASON</span>
+        </div>
+    </div>
+    <hr class="hide">
+    <div id="dkContent" class="cont_skin" role="main">
+        <div id="cMain">
+            <div id="mFeature" class="wrap_sub">
+                <div class="cont_sub">
+                    <div class="inner_sub">
+                        <div class="area_sub">
+                            <div role="navigation" class="area_navi">
+                                <ul class="tt_category"><li><a class="link_tit" href="/category">List of Articles <span class="c_cnt">(256)</span></a><ul class="category_list"><li><a class="link_item" href="/category/Tips">Tips <span class="c_cnt">(17)</span></a><ul class="sub_category_list"><li><a class="link_sub_item" href="/category/Tips/Mac">Mac <span class="c_cnt">(17)</span></a></li></ul></li><li><a class="link_item" href="/category/Programming">Programming <span class="c_cnt">(116)</span></a><ul class="sub_category_list"><li><a class="link_sub_item" href="/category/Programming/Python%20Tutorials">Python Tutorials <span class="c_cnt">(45)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Python%20Web%20Crawler%20for%20intermediate%20learners">Python Web Crawler for inte.. <span class="c_cnt">(13)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Python%20Reverse%20Shell">Python Reverse Shell <span class="c_cnt">(4)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Python%20Program">Python Program <span class="c_cnt">(18)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Swift%20for%20Beginners">Swift for Beginners <span class="c_cnt">(28)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Bash">Bash <span class="c_cnt">(5)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Ruby">Ruby <span class="c_cnt">(2)</span></a></li><li><a class="link_sub_item" href="/category/Programming/Xcode%20with%20Swift">Xcode with Swift <span class="c_cnt">(1)</span></a></li></ul></li><li><a class="link_item" href="/category/Subjects">Subjects <span class="c_cnt">(122)</span></a><ul class="sub_category_list"><li><a class="link_sub_item" href="/category/Subjects/LIFE">LIFE <span class="c_cnt">(6)</span></a></li><li><a class="link_sub_item" href="/category/Subjects/Places">Places <span class="c_cnt">(1)</span></a></li><li><a class="link_sub_item" href="/category/Subjects/C%26E">C&amp;E <span class="c_cnt">(17)</span></a></li><li><a class="link_sub_item" href="/category/Subjects/IT">IT <span class="c_cnt">(68)</span></a></li><li><a class="link_sub_item" href="/category/Subjects/Sports">Sports <span class="c_cnt">(5)</span></a></li><li><a class="link_sub_item" href="/category/Subjects/The_Times">The_Times <span class="c_cnt">(25)</span></a></li></ul></li></ul></li></ul>
+								<a href="/guestbook" class="link_guestbook">Guestbook</a>
+                            </div>
+                            <div class="wrap_etc">
+                                <div class="col_aside left_side">
+                                
+                                    <div class="box_aside">
+                                        <strong class="tit_aside">Recent Posts</strong>
+                                        <ul class="list_board">
+                                            
+                                            <li><a href="/entry/애플-스크립트를-이용한-이메일-보내기-with-첨부파일" class="link_board">애플 스크립트를 이용한 이..</a></li>
+                                            
+                                            <li><a href="/entry/관리자권한으로-cron-설정하기-Its-easy-to-use" class="link_board">관리자권한으로 cron 설정..</a></li>
+                                            
+                                            <li><a href="/entry/Web-Crawler-013-Initializing-first-spider-첫-스파이더-구동하기" class="link_board">Web Crawler 013 - Initial..</a></li>
+                                            
+                                            <li><a href="/entry/Web-Crawler-012-Domain-Name-Parsing-도메인-네임-파싱하기" class="link_board">Web Crawler 012 - Domain..</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="box_aside">
+                                        <strong class="tit_aside">Recent Comments</strong>
+                                        <ul class="list_board">
+                                            
+											<li><a href="/273#comment18052483" class="link_board">와 결국 따라하면서 정주행 했..</a></li>
+    										
+											<li><a href="/178#comment18020062" class="link_board">[승인대기]</a></li>
+    										
+											<li><a href="/178#comment18011814" class="link_board">[승인대기]</a></li>
+    										
+											<li><a href="/178#comment18011813" class="link_board">[승인대기]</a></li>
+    										
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="box_aside">
+                                        <strong class="tit_aside">Link</strong>
+                                        <ul class="list_board">
+                                            
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+
+
+                                <div class="col_aside right_side">
+                                
+                                    <div class="box_aside box_calendar">
+                                        <table class="tt-calendar" cellpadding="0" cellspacing="1" style="width: 100%; table-layout: fixed">
+<caption class="cal_month">
+		<a href="/archive/201606" title="1개월 앞의 달력을 보여줍니다.">&laquo;</a>
+		&nbsp;
+		<a href="/archive/201607" title="현재 달의 달력을 보여줍니다.">2016/07</a>
+		&nbsp;
+		<a href="/archive/201608" title="1개월 뒤의 달력을 보여줍니다.">&raquo;</a>
+</caption>
+<thead>
+  <tr>
+			<th class="cal_week2">일</th>
+			<th class="cal_week1">월</th>
+			<th class="cal_week1">화</th>
+			<th class="cal_week1">수</th>
+			<th class="cal_week1">목</th>
+			<th class="cal_week1">금</th>
+			<th class="cal_week1">토</th>
+  </tr>
+</thead>
+<tbody>
+		<tr class="cal_week">
+			<td class="cal_day1">&nbsp;</td>
+			<td class="cal_day1">&nbsp;</td>
+			<td class="cal_day1">&nbsp;</td>
+			<td class="cal_day1">&nbsp;</td>
+			<td class="cal_day1">&nbsp;</td>
+			<td class=" cal_day cal_day3">1</td>
+			<td class=" cal_day cal_day3">2</td>
+		</tr>
+		<tr class="cal_week cal_current_week">
+			<td class=" cal_day cal_day_sunday cal_day4">3</td>
+			<td class=" cal_day cal_day3">4</td>
+			<td class=" cal_day cal_day3">5</td>
+			<td class=" cal_day cal_day3">6</td>
+			<td class=" cal_day cal_day3">7</td>
+			<td class=" cal_day cal_day3">8</td>
+			<td class=" cal_day cal_day3">9</td>
+		</tr>
+		<tr class="cal_week">
+			<td class=" cal_day cal_day_sunday cal_day3">10</td>
+			<td class=" cal_day cal_day3">11</td>
+			<td class=" cal_day cal_day3">12</td>
+			<td class=" cal_day cal_day3">13</td>
+			<td class=" cal_day cal_day3">14</td>
+			<td class=" cal_day cal_day3">15</td>
+			<td class=" cal_day cal_day3">16</td>
+		</tr>
+		<tr class="cal_week">
+			<td class=" cal_day cal_day_sunday cal_day3">17</td>
+			<td class=" cal_day cal_day3">18</td>
+			<td class=" cal_day cal_day3">19</td>
+			<td class=" cal_day cal_day3">20</td>
+			<td class=" cal_day cal_day3">21</td>
+			<td class=" cal_day cal_day3">22</td>
+			<td class=" cal_day cal_day3">23</td>
+		</tr>
+		<tr class="cal_week">
+			<td class=" cal_day cal_day_sunday cal_day3">24</td>
+			<td class=" cal_day cal_day3">25</td>
+			<td class=" cal_day cal_day3">26</td>
+			<td class=" cal_day cal_day3">27</td>
+			<td class=" cal_day cal_day3">28</td>
+			<td class=" cal_day cal_day3">29</td>
+			<td class=" cal_day cal_day3">30</td>
+		</tr>
+		<tr class="cal_week">
+			<td class=" cal_day cal_day_sunday cal_day3">31</td>
+			<td class="cal_day2">&nbsp;</td>
+			<td class="cal_day2">&nbsp;</td>
+			<td class="cal_day2">&nbsp;</td>
+			<td class="cal_day2">&nbsp;</td>
+			<td class="cal_day2">&nbsp;</td>
+			<td class="cal_day2">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+                                    </div>
+                                    
+                                    <div class="box_aside box_tag">
+                                        <strong class="tit_aside">Tags</strong>
+                                        <ul class="list_tag">
+                                            
+											<li><a href="/tag/function" class="link_tag cloud4">function</a></li>
+    										
+											<li><a href="/tag/os%20x" class="link_tag cloud3">os x</a></li>
+    										
+											<li><a href="/tag/Python" class="link_tag cloud2">Python</a></li>
+    										
+											<li><a href="/tag/Swift" class="link_tag cloud4">Swift</a></li>
+    										
+											<li><a href="/tag/스위프트" class="link_tag cloud4">스위프트</a></li>
+    										
+											<li><a href="/tag/맥" class="link_tag cloud4">맥</a></li>
+    										
+											<li><a href="/tag/웹" class="link_tag cloud4">웹</a></li>
+    										
+											<li><a href="/tag/pycharm" class="link_tag cloud4">pycharm</a></li>
+    										
+											<li><a href="/tag/파이썬" class="link_tag cloud2">파이썬</a></li>
+    										
+											<li><a href="/tag/튜토리얼" class="link_tag cloud3">튜토리얼</a></li>
+    										
+											<li><a href="/tag/구글" class="link_tag cloud4">구글</a></li>
+    										
+											<li><a href="/tag/Mac" class="link_tag cloud3">Mac</a></li>
+    										
+											<li><a href="/tag/함수" class="link_tag cloud4">함수</a></li>
+    										
+											<li><a href="/tag/ios" class="link_tag cloud4">ios</a></li>
+    										
+											<li><a href="/tag/app" class="link_tag cloud4">app</a></li>
+    										
+											<li><a href="/tag/파이썬3" class="link_tag cloud3">파이썬3</a></li>
+    										
+											<li><a href="/tag/웹%20크롤러" class="link_tag cloud4">웹 크롤러</a></li>
+    										
+											<li><a href="/tag/Tutorials" class="link_tag cloud4">Tutorials</a></li>
+    										
+											<li><a href="/tag/크롤러" class="link_tag cloud4">크롤러</a></li>
+    										
+											<li><a href="/tag/terminal" class="link_tag cloud4">terminal</a></li>
+    										
+											<li><a href="/tag/Tutorial" class="link_tag cloud4">Tutorial</a></li>
+    										
+											<li><a href="/tag/application" class="link_tag cloud4">application</a></li>
+    										
+											<li><a href="/tag/애플" class="link_tag cloud2">애플</a></li>
+    										
+											<li><a href="/tag/애플리케이션" class="link_tag cloud4">애플리케이션</a></li>
+    										
+											<li><a href="/tag/python3" class="link_tag cloud3">python3</a></li>
+    										
+											<li><a href="/tag/Apple" class="link_tag cloud1">Apple</a></li>
+    										
+											<li><a href="/tag/web" class="link_tag cloud4">web</a></li>
+    										
+											<li><a href="/tag/어플" class="link_tag cloud4">어플</a></li>
+    										
+											<li><a href="/tag/Google" class="link_tag cloud4">Google</a></li>
+    										
+											<li><a href="/tag/앱" class="link_tag cloud4">앱</a></li>
+    										
+                                        </ul>
+                                        <a href="/tag" class="link_more">more</a>
+                                    </div>
+                                    
+                                    <div class="box_aside box_archive">
+                                        <strong class="tit_aside">Archives</strong>
+                                        <ul class="list_keep">
+                                            
+                                            <li><a href="/archive/201606" class="link_keep">2016/06</a> (2)</li>
+                                            
+                                            <li><a href="/archive/201604" class="link_keep">2016/04</a> (5)</li>
+                                            
+                                            <li><a href="/archive/201603" class="link_keep">2016/03</a> (9)</li>
+                                            
+                                            <li><a href="/archive/201602" class="link_keep">2016/02</a> (6)</li>
+                                            
+                                            <li><a href="/archive/201601" class="link_keep">2016/01</a> (18)</li>
+                                            
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="ico_skin btn_close">닫기</button>
+
+                    <strong class="screen_out">관리 메뉴</strong>
+                    <ul class="list_control">
+                        <li><a href="/admin/entry/post" class="ico_skin link_write" title="글쓰기">글쓰기</a></li>
+                        <li><a href="/guestbook" class="ico_skin link_memo" title="방명록">방명록</a></li>
+                        <li><a href="http://creativeworks.tistory.com/rss" class="ico_skin link_rss" title="RSS">RSS</a></li>
+                        <li><a href="/admin" class="ico_skin link_manage" title="관리">관리</a></li>
+                    </ul>
+                </div>
+            </div>
+
+					
+					
+
+					
+					
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+            <div id="mArticle" class="article_skin">
+							
+							
+							
+							
+						
+<!-- 페이지 최상단 반응형 애드센스 광고 -->							
+							
+
+					
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1361478664898321"
+     data-ad-slot="4422628894"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+				
+	
+							
+
+							
+<!-- 페이지 최상단 클릭몬 광고 -->
+
+<!--							
+<script type="text/javascript" style="text-align:center;" src="http://tab2.clickmon.co.kr/pop/wp_ad_728_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>	
+-->
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+
+			
+							
+				<div class="index_title">					
+					<h2 class="tit_skin"><span class="txt_title">Creative Works for JASON</span></h2>
+				</div>
+
+                
+					
+
+
+                    
+                        <h2 id="dkBody" class="screen_out">[Ruby] Install nokogiri on Ubuntu. 본문</h2>
+                        <div class="area_title">
+                            <strong class="tit_category"><a href="/category/Programming/Ruby">Programming/Ruby</a></strong>
+                            <h3 class="tit_post">[Ruby] Install nokogiri on Ubuntu.</h3>
+                            <span class="info_post">JASON
+                                <span class="txt_bar"></span>2014.05.21 08:52
+															
+															
+								
+							</span>
+                        </div>
+
+					
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+<!-- 타이틀과 본문 사이 클릭몬 광고-->		
+											
+											
+											
+											
+<!--										
+										
+		<script type="text/javascript"
+						src="http://tab2.clickmon.co.kr/pop/wp_ad_728_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>	
+
+-->									
+
+											
+											
+											
+											
+											
+											
+											
+											
+											
+                        <div class="area_view">
+                            <p><span style="font-family: Verdana; font-size: 14px; line-height: 20px;">Ruby를 사용하여 HTML을 파싱하기 위해서 nokogiri를 사용려고 Ubuntu에 nokogiri를 설치하면 libxml2를 찾지 못한다는 에러를 만나게 된다.</span><br style="font-family: Verdana; font-size: 14px; line-height: 20px;"><br style="font-family: Verdana; font-size: 14px; line-height: 20px;"></p><div style="font-family: Verdana; font-size: 14px; line-height: 20px;"><div class="txc-textbox" style="border: 1px solid rgb(238, 238, 238); background-color: rgb(238, 238, 238); padding: 10px;">$ sudo gem install nokogiri</div></div><div style="font-family: Verdana; font-size: 14px; line-height: 20px;"><br /><div>ERROR: &nbsp;Error installing nokogiri:</div><div><span class="Apple-tab-span" style="float: left; min-height: 1px; margin-left: 30px; white-space: pre;">	</span>ERROR: Failed to build gem native extension.</div><div><br /><span id="callbacknestcreativeworkstistorycom1326" style="width:1px; height:1px; float:right"><embed  allowscriptaccess="always"  id="bootstrappercreativeworkstistorycom1326"  src="http://creativeworks.tistory.com/plugin/CallBack_bootstrapperSrc?nil_profile=tistory&amp;nil_type=copied_post"  width="1"  height="1"  wmode="transparent"  type="application/x-shockwave-flash"  EnableContextMenu="false"  FlashVars="&amp;callbackId=creativeworkstistorycom1326&amp;host=http://creativeworks.tistory.com&amp;embedCodeSrc=http%3A%2F%2Fcreativeworks.tistory.com%2Fplugin%2FCallBack_bootstrapper%3F%26src%3D%2F%2Fs1.daumcdn.net%2Fcfs.tistory%2Fresource%2F4864%2Fblog%2Fplugins%2FCallBack%2Fcallback%26id%3D1%26callbackId%3Dcreativeworkstistorycom1326%26destDocId%3Dcallbacknestcreativeworkstistorycom1326%26host%3Dhttp%3A%2F%2Fcreativeworks.tistory.com%26float%3Dleft" swLiveConnect="true"/></span></div><div>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;/usr/bin/ruby1.8 extconf.rb</div><div>checking for libxml/parser.h... no</div><div>-----</div><div>libxml2 is missing. &nbsp;please visit http://nokogiri.org/tutorials/installing_nokogiri.html for help with installing dependencies.</div><div>-----</div><div>*** extconf.rb failed ***</div><div>Could not create Makefile due to some reason, probably lack of</div><div>necessary libraries and/or headers. &nbsp;Check the mkmf.log file for more</div><div>details. &nbsp;You may need configuration options<br /><br />이는 libxml2의 라이브러리가 Ubuntu에 설치되어 있지 않아서 생기는 문제이다.<br /><br />해결 방법은 libxml2 라이브러리들을 설치해주고 nokogiri를 설치하면 된다.<br /><br /><div class="txc-textbox" style="border: 1px solid rgb(238, 238, 238); background-color: rgb(238, 238, 238); padding: 10px;">$ sudo apt-get install libxml2 libxml2-dev libxslt1-dev&nbsp;</div><br /><div class="txc-textbox" style="border: 1px solid rgb(238, 238, 238); background-color: rgb(238, 238, 238); padding: 10px;">$ sudo gem install nokogiri</div><br /><div class="txc-textbox" style="border: 1px solid rgb(238, 238, 238); background-color: rgb(238, 238, 238); padding: 10px;">$ irb</div><br /><div></div><div class="txc-textbox" style="border: 1px solid rgb(238, 238, 238); background-color: rgb(238, 238, 238); padding: 10px;"><div>irb(main):001:0&gt; require 'rubygems'</div><div>=&gt; true</div><div>irb(main):002:0&gt; require 'nokogiri'</div><div>=&gt; true</div></div><div></div><div><br /></div>&nbsp;</div></div><p><br /></p>
+
+
+<div id="adsense_2"></div><div id="adsense_3"></div><div style="width:100%;margin-top:30px;clear:both;height:30px"><div style="width:31px;float:left;"><a href="/toolbar/popup/abuseReport/?entryId=1" onclick="window.open(this.href, 'tistoryThisBlogPopup', 'width=550, height=510, toolbar=no, menubar=no, status=no, scrollbars=no'); return false;"><img style="border:0" src="//t1.daumcdn.net/tistory_admin/static/ico/ico_spam_report.png" alt="신고"></a></div></div><div class="tt-plugin tt-share-entry-with-sns tt-sns-icon-alignment-left tt-sns-icon-size-big">
+	<div class="tt-sns-wrap" id="ttSnsWrap-1">
+		<ul class="tt-sns-service-default">
+			<li class="tt-sns-service-kakaostory"><a href="javascript:;" onclick="ShareEntryWithSNS.share('kakaostory', '1', '%5BRuby%5D%20Install%20nokogiri%20on%20Ubuntu.');">카카오스토리</a></li>
+			<li class="tt-sns-service-twitter"><a href="javascript:;" onclick="ShareEntryWithSNS.share('twitter', '1', '%5BRuby%5D%20Install%20nokogiri%20on%20Ubuntu.');">트위터</a></li>
+			<li class="tt-sns-service-facebook"><a href="javascript:;" onclick="ShareEntryWithSNS.share('facebook', '1', '%5BRuby%5D%20Install%20nokogiri%20on%20Ubuntu.');">페이스북</a></li>
+		</ul>
+	</div>
+	<div class="tt-sns-clear"></div>
+</div>
+<div style="text-align:left; padding-top:10px;clear:both">
+<iframe src="http://www.facebook.com/plugins/like.php?href=http://creativeworks.tistory.com/1&amp;layout=button_count&amp;show_faces=true&amp;width=106&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:106px; height:30px;" allowTransparency="true"></iframe>
+</div>
+<div class="another_category another_category_color_gray">
+<h4>'<a href="/category/Programming">Programming</a>&nbsp;>&nbsp;<a href="/category/Programming/Ruby">Ruby</a>' 카테고리의 다른 글</h4>
+<table>
+<tr>
+<th>
+<a href="http://creativeworks.tistory.com/entry/Nodejs를-이용하여-웹-사이트-데이터-가져오기web-scraping-Phantomjs" >[Ruby] Node.js를 이용하여 웹 사이트 데이터 가져오기(web scraping, Phantomjs)</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2015.08.04</td>
+</tr>
+<tr>
+<th>
+<a href="http://creativeworks.tistory.com/entry/Install-nokogiri-on-Ubuntu"  class ="current" >[Ruby] Install nokogiri on Ubuntu.</a>&nbsp;&nbsp;<span>(0)</span>
+</th>
+<td>
+2014.05.21</td>
+</tr>
+</table></div>
+                        </div>
+											
+											
+											
+											
+										
+											
+											
+											
+	
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+	<!-- 태그 위 가로 클릭몬 광고-->
+											
+											
+		<script type="text/javascript" src="http://tab2.clickmon.co.kr/pop/wp_ad_728_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>	
+									
+		
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+											
+                        <div class="area_etc">
+                            
+        					<dl class="list_tag">
+        						<dt>Tag</dt>
+        						<dd><a href="/tag/install"  rel="tag">install</a>,
+<a href="/tag/nokogiri"  rel="tag">nokogiri</a>,
+<a href="/tag/ubuntu"  rel="tag">ubuntu</a></dd>
+        					</dl>
+        					
+
+                            <strong class="screen_out">공유하기 링크</strong>
+                            <ul class="list_share">
+                                <li><a href="#none" class="ico_skin link_fb" data-service="facebook">페이스북</a></li>
+                                <li><a href="#none" class="ico_skin link_ks" data-service="kakaostory">카카오스토리</a></li>
+                                <li><a href="#none" class="ico_skin link_tw" data-service="twitter">트위터</a></li>
+                            </ul>
+                        </div>
+
+						
+							<div class="area_related">
+								<strong class="tit_related">'Programming/Ruby' Related Articles</strong>
+								<ul class="list_related">
+									
+										<li class="text_type">
+											<a href="/entry/Nodejs를-이용하여-웹-사이트-데이터-가져오기web-scraping-Phantomjs" class="link_related">
+												
+												<span class="txt_related">[Ruby] Node.js를 이용하여 웹 사이트 데이터 가져오기(web scraping, Phantomjs)</span>
+												<span class="date_related">2015.08.04</span>
+												<span class="frame_related"></span>
+											</a>
+										</li>
+									
+								</ul>
+								<a href="/category/Programming/Ruby" class="link_more">more</a>
+							</div>
+						
+
+                        <div class="area_reply">
+                            <strong class="tit_reply"><span id="commentCount1">0</span>  Comments</strong>
+                            <div id="entry1Comment" style="display:block">
+                                
+
+                                <form method="post" action="/comment/add/1" onsubmit="return false" style="margin: 0">
+                                    <fieldset class="fld_reply">
+                                        <legend class="screen_out">댓글쓰기 폼</legend>
+                                        
+        									
+                                                <div class="writer_info">
+                                                    <span class="info_name">
+                                                        <label for="name" class="lab_info screen_out">이름</label>
+                                                        <span class="wrap_info">
+                                                            <input type="text" name="name" id="name" class="inp_info" placeholder="Name" tabindex="1">
+                                                        </span>
+                                                    </span>
+                                                    <span class="info_pw ">
+                                                        <label for="password" class="lab_info screen_out">비밀번호</label>
+                                                        <span class="wrap_info">
+                                                            <input type="password" name="password" id="password" class="inp_info" placeholder="Password" tabindex="2">
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            
+                                            <div class="writer_check">
+                                                <span class="check_secret ">
+                                                    <input type="checkbox" name="secret" id="secret" class="inp_secret" tabindex="4">
+                                                    <label for="secret" class="lab_secret">
+                                                        <span class="ico_skin ico_check"></span>
+                                                        Secret
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        
+
+                                        <div class="reply_write ">
+                                            <label for="comment" class="lab_write screen_out">내용</label>
+                                            <textarea name="comment" id="comment" class="tf_reply" placeholder="여러분의 소중한 댓글을 입력해주세요" tabindex="3"></textarea>
+                                        </div>
+
+                                        <div class="writer_btn">
+                                            <button type="submit" class="btn_enter" onclick="addComment(this, 1); return false;" tabindex="5">Send</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div><script type="text/javascript">loadedComments[1]=true;highlight()</script>
+                        </div>
+
+
+                    
+                
+
+							
+							
+							
+							
+							
+							
+							
+				
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+
+			
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+				
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+<!--페이지 위 가로 클릭몬 광고-->			
+							
+							
+							
+<script type="text/javascript" style="text-align:center;" src="http://tab2.clickmon.co.kr/pop/wp_ad_728_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>	
+			
+<script type="text/javascript" style="text-align:center;" src="http://tab2.clickmon.co.kr/pop/wp_ad_728_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>		
+							
+							
+							
+							
+
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+                
+    				<div class="area_paging">
+    					<span class="inner_paging">
+                            <a href='/2' class="btn_prev "><span class="ico_skin ico_prev"></span>Prev</a>
+    						
+    							<a href='/275' class="link_page"><span>1</span></a>
+    						 <span class="interword">...</span> 
+    							<a href='/5' class="link_page"><span>252</span></a>
+    						
+    							<a href='/4' class="link_page"><span>253</span></a>
+    						
+    							<a href='/3' class="link_page"><span>254</span></a>
+    						
+    							<a href='/2' class="link_page"><span>255</span></a>
+    						
+    							<a  class="link_page"><span class="selected" >256</span></a>
+    						
+                            <a  class="btn_next no-more-next">Next<span class="ico_skin ico_next"></span></a>
+    					</span>
+    				</div>
+                
+            </div>
+        </div>
+    </div>
+    <hr class="hide">
+    <div id="dkFoot" role="contentinfo" class="area_foot">
+        <small class="info_copyright">
+            Blog is powered by
+            <a href="http://www.kakaocorp.com" class="emph_t" target="_blank">kakao</a> / Designed by
+            <a href="http://www.tistory.com" class="emph_t" target="_blank">Tistory</a>
+        </small>
+    </div>
+</div>
+
+
+
+<script src="//s1.daumcdn.net/cfs.tistory/custom/blog/168/1689009/skin/images/script.js"></script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 본문 광고 삽입용 - 애드센스, 클릭몬 -->	
+	<!-- 애드센스 -->
+	
+<!-- 호출을 할 때 여기에 사용된 순서대로 호출이 되어야 홈에서 로딩된다. -->	
+	
+	
+	
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+				
+		
+	
+	
+
+	
+	
+	
+				
+				
+				
+<!-- 애드센스 본문 중간 2nd 728*90 삽입 광고 -->	
+
+<!-- 애드센스 본문 중간 3rd 728*90 삽입 광고 -->
+	
+	
+-	
+<div id="movead_ad_2" style="width:100%;text-align:center;">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-1361478664898321";
+    google_ad_slot = "6053823697";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+	
+	
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<script type="text/javascript">
+   function adLocate() {
+     if($("#adsense_2").length=="1"){
+      $("#adsense_2").append($("#movead_ad_2"))
+     } else{
+      $("#movead_ad_2").remove()
+     };
+   }
+   $('document').ready(adLocate());
+</script>
+			
+
+
+	
+	
+	
+	
+	
+				
+	
+
+
+
+<div id="movead_ad_3" style="width:100%;text-align:center;">
+<script type="text/javascript">
+    google_ad_client = "ca-pub-1361478664898321";
+    google_ad_slot = "9007290099";
+    google_ad_width = 728;
+    google_ad_height = 90;
+</script>
+	
+	
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+<script type="text/javascript">
+   function adLocate() {
+     if($("#adsense_3").length=="1"){
+      $("#adsense_3").append($("#movead_ad_3"))
+     } else{
+      $("#movead_ad_3").remove()
+     };
+   }
+   $('document').ready(adLocate());
+</script>
+
+
+
+	
+	
+
+
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+				
+<!-- 클릭몬  본문 광고 삽입 -->		
+	
+<!--	
+	<!-- 클릭몬 웹 배너 -->	
+	<!-- 클릭몬 웹배너 300*250 -->
+
+	
+<div id="movead_click" style="width:100%;text-align:center;">
+
+		
+		
+<script type="text/javascript" src="http://tab2.clickmon.co.kr/pop/wp_ad_300_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1019261%7C%5E%7CAdver_M_1003115" ></script>
+	
+<script type="text/javascript">
+   function adLocate() {
+     if($("#clickmon_web_1").length=="1"){
+      $("#clickmon_web_1").append($("#movead_click"))
+     } else{
+      $("#movead_click").remove()
+     };
+   }
+   $('document').ready(adLocate());
+</script>
+-->
+	
+	
+
+
+	
+	
+	
+	
+	
+<script type="text/javascript">
+ document.oncontextmenu = new Function ('return false');
+ document.ondragstart = new Function ('return false');
+ document.onselectstart = new Function ('return false');
+  document.body.style.MozUserSelect = 'none';
+</script>
+<script type="text/javascript" src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/PreventCopyContents/js/functions.js"></script>
+
+<script type="text/javascript" src="http://wcs.naver.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "7233ad5ad4b194";
+wcs_do();
+</script>
+<script id="DragSearchJs" type="text/javascript" src="http://s1.daumcdn.net/img.search/front/js/searchDragSelection.js?nil_ch=tistory" charset="euc-kr"></script>
+<script> if (!window.jQuery) document.write("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js\"><\/script>") </script>
+	<script src="//s1.daumcdn.net/cfs.tistory/resource/4864/blog/plugins/lightbox/assets/js/lightbox.min.js"></script>
+	<script>
+	    lightbox.option({
+			"fadeDuration": 200,
+		    "resizeDuration": 200,
+		    "wrapAround": false,
+			"albumLabel": "%1 / %2",
+			"fitImagesInViewport":true ,
+			"stopEvent": false
+	    })
+	</script><script type="text/javascript">
+var _tiq = 'undefined' !== typeof _tiq ? _tiq : []; // Global Variables
+_tiq.push(["__setParam", "title", "Creative Works for JASON :: [Ruby] Install nokogiri on Ubuntu."]);
+_tiq.push(["__setParam", "svcdomain", "user.tistory.com"]);
+_tiq.push(["__setParam", "category", ""]);
+_tiq.push(["__setParam", "articleno", "1"]);
+_tiq.push(["__setParam", "plink", "http://creativeworks.tistory.com/1"]);
+_tiq.push(["__setParam", "date", "2014-05-21 08:52:57"]);
+_tiq.push(["__setParam", "author", "creativeworks"]);
+_tiq.push(["__setParam", "length", "2607"]);
+_tiq.push(["__setParam", "isauthor", "N"]);
+_tiq.push(["__setParam", "ishidden", "1"]);
+_tiq.push(["__setParam", "comments", "0"]);
+_tiq.push(["__setParam", "param1", "0"]);
+_tiq.push(["__setParam", "param2", "e"]);
+_tiq.push(["__setParam", "param3", ""]);
+_tiq.push(["__trackPageview"]);
+(function(d) {
+	var se = d.createElement('script'); se.type = 'text/javascript'; se.async = true;
+	se.src = location.protocol + '//m2.daumcdn.net/tiara/js/td.min.js';
+	var s = d.getElementsByTagName('head')[0]; s.appendChild(se);
+})(document);
+</script>
+<script type="text/javascript">
+var __TiaraObj = __TiaraObj || {}; if ('undefined' === typeof __TiaraObj.startTime) { __TiaraObj.startTime = new Date(); }
+var addEvent = function (evt, fn) { window.addEventListener ? window.addEventListener(evt, fn, false) : window.attachEvent('on' + evt, fn); };
+var ua = navigator.userAgent.toLowerCase(); var isIOS = /iP[ao]d|iPhone/i.test(ua); var contentStat = function() {
+_tiq.push(['__content', 't_content', {
+"c_id":"1689009_1", 
+"c_title":"Creative Works for JASON :: [Ruby] Install nokogiri on Ubuntu.", 
+"type":"article", 
+"author":"JASON", 
+"author_id":"1260674", 
+"cp":"creativeworks", 
+"cp_id":"1689009", 
+"regdata":"2014-05-21 08:52:57", 
+"plink":"http://creativeworks.tistory.com/1", 
+"media":"pcweb", 
+"comment_cnt":0, 
+"duration": (new Date()).getTime() - __TiaraObj.startTime.getTime()
+}]); };
+addEvent(isIOS ? "pagehide" : "beforeunload", contentStat);
+</script>
+<script type="text/javascript">window.roosevelt_params_queue = window.roosevelt_params_queue || []; window.roosevelt_params_queue.push({channel_id: "dk", channel_label: "tistory"});</script>
+<script type="text/javascript" src="//adimg.daumcdn.net/rt/dk_bt/roosevelt_dk_bt.js" async></script><script type="text/javascript">
+if(window.console!=undefined){
+setTimeout(console.log.bind(console, "%cTISTORY","font: 8em Arial; color: #EC6521; font-weight:bold"),0);
+setTimeout(console.log.bind(console, "%c  나를 표현하는 블로그","font: 2em sans-serif; color: #333;"),0);}
+</script><div id="tistorytoolbarid" style="position:absolute;height:20px;top:4px;right:0px;background-color:transparent;background-image:none;z-index:11;">
+	<div class="tistorytoolbar tt_menubar_login">
+		<div class="tt_menubar_white">
+			<div id="ttMenubarInnerWrap" class="tt_menubar_inner">
+				<div class="tt_menubar_bg_toolbar"></div>
+				<h2 style="display:none;">티스토리 툴바</h2>
+				<div class="tt_menubar_mainmenu"><a class="tt_menubar_link_tit tt_menubar_link_tit_daum tt_menubar_link_tit_eng" href="http://www.daum.net/?nil_ref=tistory" target="_blank">Daum</a></div>
+				<div class="tt_menubar_bg_bar"></div>
+				<div class="tt_menubar_mainmenu"><a class="tt_menubar_link_tit tt_menubar_link_tit_eng" href="http://www.tistory.com">Tistory</a></div>
+				<div class="tt_menubar_bg_bar"></div>
+				<div class="tt_menubar_logout"><a class="tt_menubar_link_tit" href="https://www.tistory.com/login">로그인</a></div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
